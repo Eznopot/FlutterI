@@ -14,7 +14,8 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-
+  my_cache_manager:
+    path: ../package/my_cache_manager
 dev_dependencies:
   flutter_test:
     sdk: flutter
