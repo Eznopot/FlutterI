@@ -17,7 +17,6 @@ dependencies:
   my_cache_manager:
     path: ../package/my_cache_manager
 
-  path_provider: ^2.0.9
   google_fonts: ^2.3.1
   font_awesome_flutter: ^9.2.0
   audioplayers: ^0.20.1
@@ -43,5 +42,4 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/music/
     - assets/icon/
