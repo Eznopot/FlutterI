@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:deezify/src/register/register_service.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/custom_center.dart';
@@ -19,15 +20,22 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<RegisterView> {
   final TextEditingController usernameController = TextEditingController();
-  late final RegisterController controller;
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  late final RegisterController controller;
 
   ButtonState buttonState = ButtonState.normal;
+
+  @override void initState() {
+    super.initState();
+    controller = RegisterController(RegisterService());
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: size.height * 0.1, horizontal: size.width * 0.1),
         child: Column(
@@ -63,7 +71,7 @@ class _RegisterViewState extends State<RegisterView> {
               )),
             ),
             Expanded(
-              flex: 4,
+              flex: 2,
               child: Wrap(children: [
                 Padding(
                   padding: const EdgeInsets.all(12),
@@ -73,7 +81,7 @@ class _RegisterViewState extends State<RegisterView> {
                         child: CustomTextField(
                           labelText: "Email",
                           hintText: "Enter your username",
-                          controller: usernameController,
+                          controller: emailController,
                         ),
                       ),
                       CustomCenter(
@@ -92,10 +100,10 @@ class _RegisterViewState extends State<RegisterView> {
                           top: 12,
                         ),
                         child: CustomTextField(
-                          isPassword: true,
+                          isPassword: false,
                           labelText: "Full name",
                           hintText: "Enter your Fullname",
-                          controller: passwordController,
+                          controller: usernameController,
                         ),
                       ),
                       CustomCenter(
@@ -108,7 +116,17 @@ class _RegisterViewState extends State<RegisterView> {
                               "Sign up",
                               style: TextStyle(color: Colors.white),
                             ),
-                            onPressed: () {}),
+                            onPressed: () {
+                              if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty && usernameController.text.isNotEmpty) {
+                                controller.registerUser(emailController.text, passwordController.text, usernameController.text);
+                                buttonState = ButtonState.normal;
+                              } else {
+                                print("err");
+                                setState(() {
+                                  buttonState = ButtonState.error;
+                                });
+                              }
+                            }),
                       ),
                     ],
                   ),
