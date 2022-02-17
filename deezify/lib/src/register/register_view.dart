@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:deezify/src/register/register_service.dart';
 import 'package:flutter/material.dart';
 
+import '../login/login_view.dart';
 import '../widget/custom_center.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/progress_button.dart';
@@ -79,6 +80,9 @@ class _RegisterViewState extends State<RegisterView> {
                     children: [
                       Center(
                         child: CustomTextField(
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                          ),
                           labelText: "Email",
                           hintText: "Enter your username",
                           controller: emailController,
@@ -89,6 +93,9 @@ class _RegisterViewState extends State<RegisterView> {
                           top: 12,
                         ),
                         child: CustomTextField(
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                          ),
                           isPassword: true,
                           labelText: "Password",
                           hintText: "Enter your password",
@@ -100,6 +107,9 @@ class _RegisterViewState extends State<RegisterView> {
                           top: 12,
                         ),
                         child: CustomTextField(
+                          border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(0)),
+                          ),
                           isPassword: false,
                           labelText: "Full name",
                           hintText: "Enter your Fullname",
@@ -108,25 +118,45 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                       CustomCenter(
                         padding: const EdgeInsets.only(
-                          top: 12,
+                          top: 24, left: 24, right: 24,
                         ),
                         child: ProgressButton(
+                            borderRadiusSize: 0,
                             buttonState: buttonState,
                             child: const Text(
                               "Sign up",
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
+                              setState(() {
+                                buttonState = ButtonState.inProgress;
+                              });
                               if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty && usernameController.text.isNotEmpty) {
                                 controller.registerUser(emailController.text, passwordController.text, usernameController.text).then((value) {
-                                  buttonState = ButtonState.inProgress;
+                                  Future.delayed(const Duration(seconds: 1)).then((value) {
+                                    setState(() {
+                                      buttonState = ButtonState.normal;
+                                    });
+                                    Navigator.of(context).pushNamed(LoginView.routeName, arguments: emailController.text);
+                                 });
                                 });
-                                buttonState = ButtonState.normal;
                               } else {
                                 setState(() {
                                   buttonState = ButtonState.error;
                                 });
                               }
+                            }),
+                      ),
+                      CustomCenter(
+                        padding: const EdgeInsets.only(
+                            top: 6,
+                        ),
+                        child: TextButton(
+                            child: const Text(
+                              "Login",
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(LoginView.routeName);
                             }),
                       ),
                     ],

@@ -4,15 +4,17 @@ import 'dart:io';
 import 'package:deezify/src/login/login_service.dart';
 import 'package:flutter/material.dart';
 
+import '../register/register_view.dart';
 import '../widget/custom_center.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/progress_button.dart';
 import 'login_controller.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({Key? key}) : super(key: key);
+  const LoginView({Key? key, this.email}) : super(key: key);
 
   static const routeName = '/login';
+  final String? email;
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -27,6 +29,9 @@ class _LoginViewState extends State<LoginView> {
 
   @override void initState() {
     super.initState();
+    if (widget.email != null) {
+      emailController.text = widget.email!;
+    }
     controller = LoginController(LoginService());
   }
 
@@ -78,6 +83,9 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       Center(
                         child: CustomTextField(
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                          ),
                           labelText: "Email",
                           hintText: "Enter your username",
                           controller: emailController,
@@ -88,6 +96,9 @@ class _LoginViewState extends State<LoginView> {
                           top: 12,
                         ),
                         child: CustomTextField(
+                          border: const OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(0)),
+                          ),
                           isPassword: true,
                           labelText: "Password",
                           hintText: "Enter your password",
@@ -96,7 +107,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       CustomCenter(
                         padding: const EdgeInsets.only(
-                          top: 12,
+                          top: 24, left: 24, right: 24
                         ),
                         child: ProgressButton(
                             buttonState: buttonState,
@@ -107,7 +118,9 @@ class _LoginViewState extends State<LoginView> {
                             onPressed: () {
                               if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
                                 controller.loginUser(emailController.text, passwordController.text).then((value) {
-                                  buttonState = ButtonState.inProgress;
+                                  setState(() {
+                                    buttonState = ButtonState.inProgress;
+                                  });
                                   setState(() {
                                     if (controller.logged) {
                                       buttonState = ButtonState.normal;
@@ -121,6 +134,18 @@ class _LoginViewState extends State<LoginView> {
                                   buttonState = ButtonState.error;
                                 });
                               }
+                            }),
+                      ),
+                      CustomCenter(
+                        padding: const EdgeInsets.only(
+                            top: 6,
+                        ),
+                        child: TextButton(
+                            child: const Text(
+                              "Sign up",
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(RegisterView.routeName);
                             }),
                       ),
                     ],

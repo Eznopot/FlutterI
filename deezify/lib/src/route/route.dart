@@ -1,6 +1,7 @@
 import 'package:deezify/src/Home/home_view.dart';
 import 'package:flutter/material.dart';
 
+import '../login/login_view.dart';
 import '../register/register_view.dart';
 import '../take_picture/take_pictures_page.dart';
 
@@ -15,6 +16,11 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const RegisterView());
       case TakePicturePage.routeName:
         return MaterialPageRoute(builder: (_) => TakePicturePage());
+      case LoginView.routeName:
+        if (args is String) {
+          return MaterialPageRoute(builder: (_) => LoginView(email: args,));
+        }
+        return MaterialPageRoute(builder: (_) => const LoginView());
       default:
         return _errorRoute();
     }

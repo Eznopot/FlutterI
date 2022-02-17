@@ -12,7 +12,7 @@ class LoginController with ChangeNotifier {
   bool get logged => _logged;
 
   Future<void> loginUser(String email, String password) async {
-    _logged = await _registerService.registerUser(email, password);
+    _logged = await _registerService.loginUser(email, password);
     notifyListeners();
   }
 }
