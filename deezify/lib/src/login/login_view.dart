@@ -1,34 +1,33 @@
 
 import 'dart:io';
 
-import 'package:deezify/src/register/register_service.dart';
+import 'package:deezify/src/login/login_service.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/custom_center.dart';
 import '../widget/custom_text_field.dart';
 import '../widget/progress_button.dart';
-import 'register_controller.dart';
+import 'login_controller.dart';
 
-class RegisterView extends StatefulWidget {
-  const RegisterView({Key? key}) : super(key: key);
+class LoginView extends StatefulWidget {
+  const LoginView({Key? key}) : super(key: key);
 
-  static const routeName = '/register';
+  static const routeName = '/login';
 
   @override
-  State<RegisterView> createState() => _RegisterViewState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _RegisterViewState extends State<RegisterView> {
-  final TextEditingController usernameController = TextEditingController();
+class _LoginViewState extends State<LoginView> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  late final RegisterController controller;
+  late final LoginController controller;
 
   ButtonState buttonState = ButtonState.normal;
 
   @override void initState() {
     super.initState();
-    controller = RegisterController(RegisterService());
+    controller = LoginController(LoginService());
   }
 
   @override
@@ -61,7 +60,7 @@ class _RegisterViewState extends State<RegisterView> {
                     flex: 1,
                     child: Center(
                       child: Text(
-                        "Sign up",
+                        "Login",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
@@ -99,29 +98,24 @@ class _RegisterViewState extends State<RegisterView> {
                         padding: const EdgeInsets.only(
                           top: 12,
                         ),
-                        child: CustomTextField(
-                          isPassword: false,
-                          labelText: "Full name",
-                          hintText: "Enter your Fullname",
-                          controller: usernameController,
-                        ),
-                      ),
-                      CustomCenter(
-                        padding: const EdgeInsets.only(
-                          top: 12,
-                        ),
                         child: ProgressButton(
                             buttonState: buttonState,
                             child: const Text(
-                              "Sign up",
+                              "Login",
                               style: TextStyle(color: Colors.white),
                             ),
                             onPressed: () {
-                              if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty && usernameController.text.isNotEmpty) {
-                                controller.registerUser(emailController.text, passwordController.text, usernameController.text).then((value) {
+                              if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+                                controller.loginUser(emailController.text, passwordController.text).then((value) {
                                   buttonState = ButtonState.inProgress;
+                                  setState(() {
+                                    if (controller.logged) {
+                                      buttonState = ButtonState.normal;
+                                    } else {
+                                      buttonState = ButtonState.error;
+                                    }
+                                  });
                                 });
-                                buttonState = ButtonState.normal;
                               } else {
                                 setState(() {
                                   buttonState = ButtonState.error;
