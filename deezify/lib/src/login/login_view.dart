@@ -86,7 +86,7 @@ class _LoginViewState extends State<LoginView> {
                       children: [
                         Center(
                           child: TextFieldNoBorder(
-                              passwordController: passwordController,
+                              passwordController: emailController,
                               title: "Email",
                               description: "Enter your email"),
                         ),

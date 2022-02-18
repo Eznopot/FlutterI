@@ -82,7 +82,7 @@ class _RegisterViewState extends State<RegisterView> {
                     children: [
                       Center(
                         child: TextFieldNoBorder(
-                            passwordController: passwordController,
+                            passwordController: emailController,
                             title: "Email",
                             description: "Enter your email",
                             isPassword: false),
@@ -102,7 +102,7 @@ class _RegisterViewState extends State<RegisterView> {
                           top: 12,
                         ),
                         child: TextFieldNoBorder(
-                            passwordController: passwordController,
+                            passwordController: usernameController,
                             title: "Full name",
                             description: "Enter your full name"),
                       ),
