@@ -1,9 +1,9 @@
-
 import 'dart:io';
 
 import 'package:deezify/src/register/register_service.dart';
 import 'package:flutter/material.dart';
 
+import '../composant/TextFieldNoBorder.dart';
 import '../login/login_view.dart';
 import '../widget/custom_center.dart';
 import '../widget/custom_text_field.dart';
@@ -27,7 +27,8 @@ class _RegisterViewState extends State<RegisterView> {
 
   ButtonState buttonState = ButtonState.normal;
 
-  @override void initState() {
+  @override
+  void initState() {
     super.initState();
     controller = RegisterController(RegisterService());
   }
@@ -36,9 +37,11 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(240, 240, 240, 1),
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: size.height * 0.1, horizontal: size.width * 0.1),
+        padding: EdgeInsets.symmetric(
+            vertical: size.height * 0.1, horizontal: size.width * 0.1),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -53,8 +56,7 @@ class _RegisterViewState extends State<RegisterView> {
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage("assets/icon/DeezifyLogo.png"),
-                            fit: BoxFit.contain
-                        ),
+                            fit: BoxFit.contain),
                       ),
                     ),
                   ),
@@ -79,46 +81,36 @@ class _RegisterViewState extends State<RegisterView> {
                   child: Column(
                     children: [
                       Center(
-                        child: CustomTextField(
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
-                          ),
-                          labelText: "Email",
-                          hintText: "Enter your username",
-                          controller: emailController,
-                        ),
+                        child: TextFieldNoBorder(
+                            passwordController: passwordController,
+                            title: "Email",
+                            description: "Enter your email",
+                            isPassword: false),
                       ),
                       CustomCenter(
                         padding: const EdgeInsets.only(
                           top: 12,
                         ),
-                        child: CustomTextField(
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
-                          ),
-                          isPassword: true,
-                          labelText: "Password",
-                          hintText: "Enter your password",
-                          controller: passwordController,
-                        ),
+                        child: TextFieldNoBorder(
+                            passwordController: passwordController,
+                            title: "Password",
+                            description: "Enter your password",
+                            isPassword: true),
                       ),
                       CustomCenter(
                         padding: const EdgeInsets.only(
                           top: 12,
                         ),
-                        child: CustomTextField(
-                          border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(0)),
-                          ),
-                          isPassword: false,
-                          labelText: "Full name",
-                          hintText: "Enter your Fullname",
-                          controller: usernameController,
-                        ),
+                        child: TextFieldNoBorder(
+                            passwordController: passwordController,
+                            title: "Full name",
+                            description: "Enter your full name"),
                       ),
                       CustomCenter(
                         padding: const EdgeInsets.only(
-                          top: 24, left: 24, right: 24,
+                          top: 24,
+                          left: 24,
+                          right: 24,
                         ),
                         child: ProgressButton(
                             borderRadiusSize: 0,
@@ -131,14 +123,24 @@ class _RegisterViewState extends State<RegisterView> {
                               setState(() {
                                 buttonState = ButtonState.inProgress;
                               });
-                              if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty && usernameController.text.isNotEmpty) {
-                                controller.registerUser(emailController.text, passwordController.text, usernameController.text).then((value) {
-                                  Future.delayed(const Duration(seconds: 1)).then((value) {
+                              if (emailController.text.isNotEmpty &&
+                                  passwordController.text.isNotEmpty &&
+                                  usernameController.text.isNotEmpty) {
+                                controller
+                                    .registerUser(
+                                        emailController.text,
+                                        passwordController.text,
+                                        usernameController.text)
+                                    .then((value) {
+                                  Future.delayed(const Duration(seconds: 1))
+                                      .then((value) {
                                     setState(() {
                                       buttonState = ButtonState.normal;
                                     });
-                                    Navigator.of(context).pushNamed(LoginView.routeName, arguments: emailController.text);
-                                 });
+                                    Navigator.of(context).pushNamed(
+                                        LoginView.routeName,
+                                        arguments: emailController.text);
+                                  });
                                 });
                               } else {
                                 setState(() {
@@ -149,14 +151,15 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                       CustomCenter(
                         padding: const EdgeInsets.only(
-                            top: 6,
+                          top: 6,
                         ),
                         child: TextButton(
                             child: const Text(
                               "Login",
                             ),
                             onPressed: () {
-                              Navigator.of(context).pushNamed(LoginView.routeName);
+                              Navigator.of(context)
+                                  .pushNamed(LoginView.routeName);
                             }),
                       ),
                     ],

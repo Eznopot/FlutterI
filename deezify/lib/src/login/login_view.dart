@@ -1,9 +1,9 @@
-
 import 'dart:io';
 
 import 'package:deezify/src/login/login_service.dart';
 import 'package:flutter/material.dart';
 
+import '../composant/TextFieldNoBorder.dart';
 import '../register/register_view.dart';
 import '../widget/custom_center.dart';
 import '../widget/custom_text_field.dart';
@@ -27,7 +27,8 @@ class _LoginViewState extends State<LoginView> {
 
   ButtonState buttonState = ButtonState.normal;
 
-  @override void initState() {
+  @override
+  void initState() {
     super.initState();
     if (widget.email != null) {
       emailController.text = widget.email!;
@@ -39,9 +40,11 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(240, 240, 240, 1),
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: size.height * 0.1, horizontal: size.width * 0.1),
+        padding: EdgeInsets.symmetric(
+            vertical: size.height * 0.1, horizontal: size.width * 0.1),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -56,8 +59,7 @@ class _LoginViewState extends State<LoginView> {
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage("assets/icon/DeezifyLogo.png"),
-                            fit: BoxFit.contain
-                        ),
+                            fit: BoxFit.contain),
                       ),
                     ),
                   ),
@@ -76,83 +78,81 @@ class _LoginViewState extends State<LoginView> {
             ),
             Expanded(
               flex: 2,
-              child: Wrap(children: [
-                Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    children: [
-                      Center(
-                        child: CustomTextField(
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
+              child: Wrap(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      children: [
+                        Center(
+                          child: TextFieldNoBorder(
+                              passwordController: passwordController,
+                              title: "Email",
+                              description: "Enter your email"),
+                        ),
+                        CustomCenter(
+                          padding: const EdgeInsets.only(
+                            top: 12,
                           ),
-                          labelText: "Email",
-                          hintText: "Enter your username",
-                          controller: emailController,
+                          child: TextFieldNoBorder(
+                              passwordController: passwordController,
+                              title: "Password",
+                              description: "Enter your password",
+                              isPassword: true),
                         ),
-                      ),
-                      CustomCenter(
-                        padding: const EdgeInsets.only(
-                          top: 12,
-                        ),
-                        child: CustomTextField(
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(0)),
-                          ),
-                          isPassword: true,
-                          labelText: "Password",
-                          hintText: "Enter your password",
-                          controller: passwordController,
-                        ),
-                      ),
-                      CustomCenter(
-                        padding: const EdgeInsets.only(
-                          top: 24, left: 24, right: 24
-                        ),
-                        child: ProgressButton(
-                            buttonState: buttonState,
-                            child: const Text(
-                              "Login",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            onPressed: () {
-                              if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-                                controller.loginUser(emailController.text, passwordController.text).then((value) {
-                                  setState(() {
-                                    buttonState = ButtonState.inProgress;
+                        CustomCenter(
+                          padding: const EdgeInsets.only(
+                              top: 24, left: 24, right: 24),
+                          child: ProgressButton(
+                              buttonState: buttonState,
+                              child: const Text(
+                                "Login",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              onPressed: () {
+                                if (emailController.text.isNotEmpty &&
+                                    passwordController.text.isNotEmpty) {
+                                  controller
+                                      .loginUser(emailController.text,
+                                          passwordController.text)
+                                      .then((value) {
+                                    setState(() {
+                                      buttonState = ButtonState.inProgress;
+                                    });
+                                    setState(() {
+                                      if (controller.logged) {
+                                        buttonState = ButtonState.normal;
+                                      } else {
+                                        buttonState = ButtonState.error;
+                                      }
+                                    });
                                   });
+                                } else {
                                   setState(() {
-                                    if (controller.logged) {
-                                      buttonState = ButtonState.normal;
-                                    } else {
-                                      buttonState = ButtonState.error;
-                                    }
+                                    buttonState = ButtonState.error;
                                   });
-                                });
-                              } else {
-                                setState(() {
-                                  buttonState = ButtonState.error;
-                                });
-                              }
-                            }),
-                      ),
-                      CustomCenter(
-                        padding: const EdgeInsets.only(
+                                }
+                              }),
+                        ),
+                        CustomCenter(
+                          padding: const EdgeInsets.only(
                             top: 6,
+                          ),
+                          child: TextButton(
+                              child: const Text(
+                                "Sign up",
+                              ),
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed(RegisterView.routeName);
+                              }),
                         ),
-                        child: TextButton(
-                            child: const Text(
-                              "Sign up",
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).pushNamed(RegisterView.routeName);
-                            }),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ]),
-            )
+                ],
+              ),
+            ),
           ],
         ),
       ),
