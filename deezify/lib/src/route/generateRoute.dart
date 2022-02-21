@@ -1,4 +1,6 @@
 import 'package:deezify/src/Home/home_view.dart';
+import 'package:deezify/src/screen/music_list.dart';
+import 'package:deezify/src/route/page_routes.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -6,8 +8,10 @@ class Routes {
     final args = settings.arguments;
 
     switch (settings.name) {
-      case HomeView.routeName:
+      case pageRoutes.home:
         return MaterialPageRoute(builder: (_) => const HomeView());
+      case pageRoutes.musicList:
+        return MaterialPageRoute(builder: (_) => const MusicListPage());
       default:
         return _errorRoute();
     }

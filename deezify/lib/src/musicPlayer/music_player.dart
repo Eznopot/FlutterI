@@ -1,10 +1,12 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MusicPlayer extends StatefulWidget {
   final AudioPlayer? musicPlayer;
-  const MusicPlayer({ Key? key, this.musicPlayer}) : super(key: key);
+  final String url;
+  const MusicPlayer({Key? key, this.musicPlayer, required this.url}) : super(key: key);
 
   @override
   _MusicPlayerState createState() => _MusicPlayerState();
@@ -13,7 +15,6 @@ class MusicPlayer extends StatefulWidget {
 class _MusicPlayerState extends State<MusicPlayer> {
   Duration _duration = Duration();
   Duration _position = Duration();
-  final String path = "https://audio.jukehost.co.uk/5cki2nEpzRbgztAodvBgU3RmRIWMG80W";
   bool isPlaying = false;
   bool isPaused = false;
   bool isLoop = false;
@@ -23,11 +24,11 @@ class _MusicPlayerState extends State<MusicPlayer> {
     Icons.pause_circle_filled,
   ];
 
+
   @override
   void initState() {
     super.initState();
-    isPlaying = true;
-    widget.musicPlayer!.play(path);
+    widget.musicPlayer!.setUrl(widget.url);
     widget.musicPlayer?.onDurationChanged.listen((d) {setState(() {
       _duration = d;
     });});
@@ -35,7 +36,6 @@ class _MusicPlayerState extends State<MusicPlayer> {
       _position = p;
     });});
 
-    widget.musicPlayer!.setUrl(path);
   }
 
   @override
@@ -52,11 +52,11 @@ class _MusicPlayerState extends State<MusicPlayer> {
       onPressed: (){
         if (!isPlaying) {
           print('is playing music');
-          widget.musicPlayer!.play(path);
+          widget.musicPlayer!.play(widget.url);
           setState(() {
             isPlaying = true;
           });
-        } else if(isPlaying){
+        } else {
           print('music is paused');
           widget.musicPlayer!.pause();
           setState(() {
@@ -67,13 +67,33 @@ class _MusicPlayerState extends State<MusicPlayer> {
     );
   }
 
-  Widget startMusic() {
+  Widget btnBackwardSlow() {
+    return IconButton(
+      icon: Icon(FontAwesomeIcons.stepBackward, size: 20.0,),
+      onPressed: (){
+        widget.musicPlayer!.setPlaybackRate(0.5);
+      },
+    );
+  }
+
+  Widget btnForwardFast() {
+    return IconButton(
+      icon: Icon(FontAwesomeIcons.stepForward, size: 20.0,),
+      onPressed: (){
+        widget.musicPlayer!.setPlaybackRate(1.5);
+      },
+    );
+  }
+
+  Widget musicControl() {
     return Container(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          btnBackwardSlow(),
           btnPlay(),
+          btnForwardFast(),
         ],
       ),
     );
@@ -103,31 +123,30 @@ class _MusicPlayerState extends State<MusicPlayer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(_position.toString().split(".").first,
-                  style: GoogleFonts.nunito(
-                    fontSize: 16.0,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(_position.toString().split(".").first,
+                    style: GoogleFonts.nunito(
+                      fontSize: 16.0,
+                    ),
                   ),
-                ),
-                Text(_duration.toString().split(".").first,
-                  style: GoogleFonts.nunito(
-                    fontSize: 16.0,
+                  Text(_duration.toString().split(".").first,
+                    style: GoogleFonts.nunito(
+                      fontSize: 16.0,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          musicSlider(),
-          startMusic(),
-        ],
-      ),
-      
+            musicSlider(),
+            musicControl(),
+          ],
+        ),
     );
   }
 }

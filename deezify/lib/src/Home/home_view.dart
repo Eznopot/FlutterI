@@ -1,10 +1,9 @@
+import 'package:deezify/src/navigationDrawer/navigation_drawer.dart';
 import 'package:flutter/material.dart';
-
-import '../widget/custom_button.dart';
+import 'package:deezify/src/config/colors.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
-  static const String routeName = "/";
 
   @override
   State<HomeView> createState() => _HomeView();
@@ -18,8 +17,11 @@ class _HomeView extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: DeezifyColors.appBarBackgound,
+      ),
+      drawer: navigationDrawer(),
       resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -33,3 +35,5 @@ class _HomeView extends State<HomeView> {
     );
   }
 }
+
+
