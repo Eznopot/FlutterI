@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:deezify/src/register/register_service.dart';
 import 'package:flutter/material.dart';
 
-import '../composant/TextFieldNoBorder.dart';
+import '../composant/form_register.dart';
+import '../composant/text_field_no_border.dart';
 import '../login/login_view.dart';
 import '../widget/custom_center.dart';
 import '../widget/custom_text_field.dart';
@@ -73,100 +74,7 @@ class _RegisterViewState extends State<RegisterView> {
                 ],
               )),
             ),
-            Expanded(
-              flex: 2,
-              child: Wrap(children: [
-                Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    children: [
-                      Center(
-                        child: TextFieldNoBorder(
-                            passwordController: emailController,
-                            title: "Email",
-                            description: "Enter your email",
-                            isPassword: false),
-                      ),
-                      CustomCenter(
-                        padding: const EdgeInsets.only(
-                          top: 12,
-                        ),
-                        child: TextFieldNoBorder(
-                            passwordController: passwordController,
-                            title: "Password",
-                            description: "Enter your password",
-                            isPassword: true),
-                      ),
-                      CustomCenter(
-                        padding: const EdgeInsets.only(
-                          top: 12,
-                        ),
-                        child: TextFieldNoBorder(
-                            passwordController: usernameController,
-                            title: "Full name",
-                            description: "Enter your full name"),
-                      ),
-                      CustomCenter(
-                        padding: const EdgeInsets.only(
-                          top: 24,
-                          left: 24,
-                          right: 24,
-                        ),
-                        child: ProgressButton(
-                            borderRadiusSize: 0,
-                            buttonState: buttonState,
-                            child: const Text(
-                              "Sign up",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                buttonState = ButtonState.inProgress;
-                              });
-                              if (emailController.text.isNotEmpty &&
-                                  passwordController.text.isNotEmpty &&
-                                  usernameController.text.isNotEmpty) {
-                                controller
-                                    .registerUser(
-                                        emailController.text,
-                                        passwordController.text,
-                                        usernameController.text)
-                                    .then((value) {
-                                  Future.delayed(const Duration(seconds: 1))
-                                      .then((value) {
-                                    setState(() {
-                                      buttonState = ButtonState.normal;
-                                    });
-                                    Navigator.of(context).pushNamed(
-                                        LoginView.routeName,
-                                        arguments: emailController.text);
-                                  });
-                                });
-                              } else {
-                                setState(() {
-                                  buttonState = ButtonState.error;
-                                });
-                              }
-                            }),
-                      ),
-                      CustomCenter(
-                        padding: const EdgeInsets.only(
-                          top: 6,
-                        ),
-                        child: TextButton(
-                            child: const Text(
-                              "Login",
-                            ),
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(LoginView.routeName);
-                            }),
-                      ),
-                    ],
-                  ),
-                ),
-              ]),
-            )
+            FormRegister(emailController: emailController, passwordController: passwordController, usernameController: usernameController, buttonState: buttonState, controller: controller)
           ],
         ),
       ),
