@@ -1,9 +1,9 @@
-import 'package:deezify/src/Home/home_view.dart';
 import 'package:flutter/material.dart';
 
-import '../login/login_view.dart';
-import '../register/register_view.dart';
-import '../take_picture/take_pictures_page.dart';
+import '../page/Home/home_view.dart';
+import '../page/login/login_view.dart';
+import '../page/register/register_view.dart';
+import '../page/take_picture/take_pictures_page.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {

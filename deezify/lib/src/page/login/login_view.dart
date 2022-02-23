@@ -1,10 +1,9 @@
 import 'dart:io';
 
-import 'package:deezify/src/login/login_service.dart';
+import 'package:deezify/src/page/login/login_service.dart';
 import 'package:flutter/material.dart';
-
-import '../composant/form_login.dart';
-import '../widget/progress_button.dart';
+import '../../composant/form_login.dart';
+import '../../widget/progress_button.dart';
 import 'login_controller.dart';
 
 class LoginView extends StatefulWidget {

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../widget/custom_button.dart';
-
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
   static const String routeName = "/";

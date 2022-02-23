@@ -2,8 +2,8 @@ import 'package:deezify/src/composant/text_field_no_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../login/login_controller.dart';
-import '../register/register_view.dart';
+import '../page/login/login_controller.dart';
+import '../page/register/register_view.dart';
 import '../widget/custom_center.dart';
 import '../widget/progress_button.dart';
 

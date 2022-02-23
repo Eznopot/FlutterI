@@ -1,14 +1,9 @@
 import 'dart:io';
 
-import 'package:deezify/src/register/register_service.dart';
+import 'package:deezify/src/page/register/register_service.dart';
 import 'package:flutter/material.dart';
-
-import '../composant/form_register.dart';
-import '../composant/text_field_no_border.dart';
-import '../login/login_view.dart';
-import '../widget/custom_center.dart';
-import '../widget/custom_text_field.dart';
-import '../widget/progress_button.dart';
+import '../../composant/form_register.dart';
+import '../../widget/progress_button.dart';
 import 'register_controller.dart';
 
 class RegisterView extends StatefulWidget {

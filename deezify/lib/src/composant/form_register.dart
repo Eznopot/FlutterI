@@ -2,9 +2,8 @@ import 'package:deezify/src/composant/text_field_no_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../login/login_controller.dart';
-import '../login/login_view.dart';
-import '../register/register_controller.dart';
+import '../page/login/login_view.dart';
+import '../page/register/register_controller.dart';
 import '../widget/custom_center.dart';
 import '../widget/progress_button.dart';
 
@@ -108,7 +107,7 @@ class _FormRegister extends State<FormRegister> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () {
-                      //registerProcess();
+                      registerProcess();
                     }),
               ),
               CustomCenter(
