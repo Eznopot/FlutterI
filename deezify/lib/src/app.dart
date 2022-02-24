@@ -1,8 +1,8 @@
+import 'package:deezify/src/page/settings/settings_controller.dart';
 import 'package:deezify/src/route/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'settings/settings_controller.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
-          initialRoute: '/',
+          initialRoute: '/login',
           onGenerateRoute: Routes.generateRoute,
         );
       },

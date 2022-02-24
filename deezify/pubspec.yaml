@@ -7,15 +7,22 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.10.1 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
+
   flutter_localizations:
     sdk: flutter
+
   my_cache_manager:
     path: ../package/my_cache_manager
+
+  gallery_saver: any
+
+  camera: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

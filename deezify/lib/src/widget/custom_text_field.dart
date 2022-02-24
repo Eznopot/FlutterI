@@ -6,15 +6,19 @@ class CustomTextField extends StatelessWidget {
     this.labelText,
     this.hintText,
     this.controller,
-    this.border,
+    this.inputBorder,
+    this.outlineInputBorder,
     this.isPassword,
+    this.color,
   }) : super(key: key);
 
   final String? labelText;
   final String? hintText;
   final bool? isPassword;
-  final OutlineInputBorder? border;
+  final InputBorder? inputBorder;
+  final OutlineInputBorder? outlineInputBorder;
   final TextEditingController? controller;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +26,12 @@ class CustomTextField extends StatelessWidget {
       obscureText: isPassword ?? false,
       controller: controller,
       decoration: InputDecoration(
-          border: border ?? const OutlineInputBorder(),
-          labelText: labelText,
-          hintText: hintText),
+        border: outlineInputBorder ?? inputBorder ?? const OutlineInputBorder(),
+        labelText: labelText,
+        hintText: hintText,
+        fillColor: color ?? Colors.white,
+        filled: color != null ? true : false,
+      ),
     );
   }
 }
