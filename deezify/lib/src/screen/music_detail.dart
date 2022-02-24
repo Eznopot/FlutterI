@@ -1,9 +1,10 @@
 import 'package:deezify/src/navigationDrawer/navigation_drawer.dart';
-import 'package:deezify/src/musicplayer/music_player.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:deezify/src/config/colors.dart';
+
+import '../musicPlayer/music_player.dart';
 
 class MusicDetailPage extends StatefulWidget {
   final String? musicName;

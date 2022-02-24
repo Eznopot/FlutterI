@@ -1,5 +1,4 @@
 import 'package:deezify/src/page/settings/settings_controller.dart';
-import 'package:deezify/src/route/route.dart';
 import 'package:deezify/src/route/generateRoute.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
