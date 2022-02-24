@@ -1,5 +1,5 @@
-import 'package:deezify/src/page/settings/settings_controller.dart';
-import 'package:deezify/src/page/settings/settings_service.dart';
+import 'package:deezify/src/screen/settings/settings_controller.dart';
+import 'package:deezify/src/screen/settings/settings_service.dart';
 import 'package:flutter/material.dart';
 
 import 'src/app.dart';

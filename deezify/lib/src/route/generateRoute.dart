@@ -3,7 +3,7 @@ import 'package:deezify/src/screen/music_list.dart';
 import 'package:deezify/src/route/page_routes.dart';
 import 'package:flutter/material.dart';
 
-import '../page/login/login_view.dart';
+import '../screen/login/login_view.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
