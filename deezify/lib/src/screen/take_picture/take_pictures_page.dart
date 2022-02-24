@@ -79,13 +79,7 @@ class _TakePicturePage extends State<TakePicturePage> {
   void takePicture() async {
     await _initializeControllerFuture;
     final image = await _controller.takePicture();
-    final result = await Navigator.of(context).pushNamed(
-      "/displayPicture", arguments : image.path
-    );
-    
-    if (result != null) {
-      Navigator.pop(context, result);
-    }
+    Navigator.pop(context, image.path);
   }
 
 }
