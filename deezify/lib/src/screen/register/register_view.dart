@@ -36,47 +36,61 @@ class _RegisterViewState extends State<RegisterView> {
       appBar: AppBar(
         backgroundColor: DeezifyColors.appBarBackgound,
         elevation: 0,
-        title: Text("Profile".toUpperCase(), style: TextStyle(color: Colors.white),),
+        title: Text(
+          "Profile".toUpperCase(),
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       drawer: navigationDrawer(),
       backgroundColor: const Color.fromRGBO(240, 240, 240, 1),
       resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: size.height * 0.1, horizontal: size.width * 0.1),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-              flex: 1,
-              child: Center(
-                  child: Column(
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("assets/icon/DeezifyLogo.png"),
-                            fit: BoxFit.contain),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(
+              vertical: size.height * 0.1, horizontal: size.width * 0.1),
+          child: SizedBox(
+            height: size.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Center(
+                      child: Column(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image:
+                                    AssetImage("assets/icon/DeezifyLogo.png"),
+                                fit: BoxFit.contain),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  const Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: Text(
-                        "Sign up",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                      const Expanded(
+                        flex: 1,
+                        child: Center(
+                          child: Text(
+                            "Sign up",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ],
-              )),
+                    ],
+                  )),
+                ),
+                FormRegister(
+                    emailController: emailController,
+                    passwordController: passwordController,
+                    usernameController: usernameController,
+                    buttonState: buttonState,
+                    controller: controller)
+              ],
             ),
-            FormRegister(emailController: emailController, passwordController: passwordController, usernameController: usernameController, buttonState: buttonState, controller: controller)
-          ],
+          ),
         ),
       ),
     );
