@@ -28,7 +28,7 @@ class HomePageCardView extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Text(
-                this.title,
+                title,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -37,7 +37,7 @@ class HomePageCardView extends StatelessWidget {
                 ),
               ),
               Text(
-                this.message,
+                message,
                 style: TextStyle(
                   fontSize: 15,
                   color: Color.fromARGB(255, 255, 255, 255)

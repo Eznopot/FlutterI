@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../settings/settings_view.dart';
-import './home_page_card.dart';
-import './home_page_logo.dart';
+import 'profile_page_view.dart';
+import '../widgets/home_page_card.dart';
+import '../widgets/home_page_logo.dart';
 
 /// Displays 
 class HomePageView extends StatelessWidget {
@@ -22,7 +22,7 @@ class HomePageView extends StatelessWidget {
         actions:  <Widget>[
           IconButton(
             onPressed: () {
-              Navigator.restorablePushNamed(context, SettingsView.routeName);
+              Navigator.restorablePushNamed(context, ProfilePageView.routeName);
             },
             icon: Image.asset('images/Profile.png'),
             iconSize: 50,
