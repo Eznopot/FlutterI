@@ -41,7 +41,7 @@ class _LoginViewState extends State<LoginView> {
         elevation: 0,
         title: Text("Login".toUpperCase(), style: TextStyle(color: Colors.white),),
       ),
-      drawer: navigationDrawer(),
+      drawer: const navigationDrawer(),
       backgroundColor: const Color.fromRGBO(240, 240, 240, 1),
       resizeToAvoidBottomInset: false,
       body: Padding(

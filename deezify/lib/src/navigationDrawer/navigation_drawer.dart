@@ -60,20 +60,21 @@ class navigationDrawer extends StatelessWidget {
           drawerBodyItem(
             icon: FontAwesomeIcons.home,
             text: 'Home',
-            onTap: () =>
-                Navigator.pushReplacementNamed(context, pageRoutes.home),
+            onTap: () => {
+              Navigator.popAndPushNamed(context, pageRoutes.home),
+            }
           ),
           drawerBodyItem(
             icon: FontAwesomeIcons.userAlt,
             text: 'Profile',
             onTap: () =>
-                Navigator.pushReplacementNamed(context, pageRoutes.login),
+                Navigator.popAndPushNamed(context, pageRoutes.profile),
           ),
           drawerBodyItem(
             icon: FontAwesomeIcons.music,
             text: 'Music Playlist',
             onTap: () =>
-                Navigator.pushReplacementNamed(context, pageRoutes.musicList),
+                Navigator.popAndPushNamed(context, pageRoutes.musicList),
           ),
           Divider(),
         ],
