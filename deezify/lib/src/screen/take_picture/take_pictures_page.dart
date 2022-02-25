@@ -1,13 +1,9 @@
-import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:deezify/src/widget/loading_dialog.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TakePicturePage extends StatefulWidget {
-
-  static const routeName = '/takePicture';
+  const TakePicturePage({Key? key}) : super(key: key);
 
   @override
   State<TakePicturePage> createState() => _TakePicturePage();

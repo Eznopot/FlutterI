@@ -65,6 +65,12 @@ class navigationDrawer extends StatelessWidget {
           ),
           drawerBodyItem(
             icon: FontAwesomeIcons.userAlt,
+            text: 'Profile',
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, pageRoutes.login),
+          ),
+          drawerBodyItem(
+            icon: FontAwesomeIcons.music,
             text: 'Music Playlist',
             onTap: () =>
                 Navigator.pushReplacementNamed(context, pageRoutes.musicList),

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:deezify/src/config/colors.dart';
+import 'package:deezify/src/navigationDrawer/navigation_drawer.dart';
 import 'package:deezify/src/screen/register/register_service.dart';
 import 'package:flutter/material.dart';
 import '../../composant/form_register.dart';
@@ -8,8 +10,6 @@ import 'register_controller.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
-
-  static const routeName = '/register';
 
   @override
   State<RegisterView> createState() => _RegisterViewState();
@@ -33,6 +33,12 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: DeezifyColors.appBarBackgound,
+        elevation: 0,
+        title: Text("Profile".toUpperCase(), style: TextStyle(color: Colors.white),),
+      ),
+      drawer: navigationDrawer(),
       backgroundColor: const Color.fromRGBO(240, 240, 240, 1),
       resizeToAvoidBottomInset: false,
       body: Padding(

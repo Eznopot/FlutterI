@@ -1,7 +1,6 @@
+import 'package:deezify/src/config/images.dart';
+import 'package:deezify/src/route/page_routes.dart';
 import 'package:flutter/material.dart';
-
-import '../screen/settings/settings_view.dart';
-
 
 /// Displays 
 class ProfileImageWidget extends StatelessWidget {
@@ -21,9 +20,9 @@ class ProfileImageWidget extends StatelessWidget {
               margin: const EdgeInsets.fromLTRB(0, 0, 0, 20),
               child: IconButton(
                 onPressed: () {
-                  Navigator.restorablePushNamed(context, SettingsView.routeName); // A rajouter le route pour modifier l'image profile
+                  Navigator.restorablePushNamed(context, pageRoutes.setting); // A rajouter le route pour modifier l'image profile
                 },
-                icon: Image.asset('images/Profile.png'),
+                icon: Image.asset(DeezifyImages.unknownProfileIcon),
                 iconSize: 200,
               )
           ),

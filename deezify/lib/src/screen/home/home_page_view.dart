@@ -1,15 +1,15 @@
+import 'package:deezify/src/config/colors.dart';
+import 'package:deezify/src/config/images.dart';
+import 'package:deezify/src/navigationDrawer/navigation_drawer.dart';
+import 'package:deezify/src/route/page_routes.dart';
 import 'package:flutter/material.dart';
 
-import 'profile_page_view.dart';
-import '../widgets/home_page_card.dart';
-import '../widgets/home_page_logo.dart';
+import '../../widget/home_page_card.dart';
+import '../../widget/home_page_logo.dart';
 
 /// Displays 
 class HomePageView extends StatelessWidget {
   const HomePageView({Key? key}) : super(key: key);
-  
-
-  static const routeName = '/home_page';
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +19,18 @@ class HomePageView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Page'),
+        backgroundColor: DeezifyColors.appBarBackgound,
         actions:  <Widget>[
           IconButton(
             onPressed: () {
-              Navigator.restorablePushNamed(context, ProfilePageView.routeName);
+              Navigator.restorablePushNamed(context, pageRoutes.profile);
             },
-            icon: Image.asset('images/Profile.png'),
+            icon: Image.asset(DeezifyImages.unknownProfileIcon),
             iconSize: 50,
           )
         ],
       ),
+      drawer: navigationDrawer(),
       body: Center(
         child: Column(
           children: <Widget>[
@@ -41,12 +43,12 @@ class HomePageView extends StatelessWidget {
                     HomePageCardView(
                       "Une qualité de son garantie\n",
                       "Deezify, avec sa technologie avancée de traitement de son, trie dans sa base de donnée les musiques qui répondent au demande exigente de qualité sonnore que Deezify à défini.", 
-                      "images/Listening_to_Music.jpg"
+                      DeezifyImages.listeningMusic,
                     ),
                     HomePageCardView(
                       "Une utilisation facile à prendre en main\n",
                       "Deezify s'est concentré à avoir un site simple, intuitifs et agréable visuellement afin de facilité son utilisation.", 
-                      "images/Design_App.jpg"
+                      DeezifyImages.designApp,
                     ),
                   ],
                 ),

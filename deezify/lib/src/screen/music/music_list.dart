@@ -1,7 +1,7 @@
 import 'package:deezify/src/config/images.dart';
 import 'package:deezify/src/model/album.dart';
 import 'package:deezify/src/navigationDrawer/navigation_drawer.dart';
-import 'package:deezify/src/screen/music_detail.dart';
+import 'package:deezify/src/screen/music/music_detail.dart';
 import 'package:deezify/src/config/colors.dart';
 import 'package:flutter/material.dart';
 

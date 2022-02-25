@@ -1,3 +1,4 @@
+import 'package:deezify/src/config/images.dart';
 import 'package:flutter/material.dart';
 
 
@@ -15,7 +16,7 @@ class HomePageLogo extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           const Image(
-            image: AssetImage("images/Deezify_Logo.png"),
+            image: AssetImage(DeezifyImages.logo),
             height: 200,
           ),
           const Text(

@@ -1,23 +1,26 @@
 import 'package:deezify/src/composant/text_field_no_border.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:deezify/src/model/arguments.dart';
+import 'package:deezify/src/route/page_routes.dart';
 import 'package:flutter/material.dart';
 
 import '../screen/login/login_controller.dart';
-import '../screen/register/register_view.dart';
 import '../widget/custom_center.dart';
 import '../widget/progress_button.dart';
 
 class FormLogin extends StatefulWidget {
+
   FormLogin(
       {Key? key,
       required this.emailController,
       required this.passwordController,
+      required this.username,
       required this.buttonState,
       required this.controller})
       : super(key: key);
 
   final TextEditingController emailController;
   final TextEditingController passwordController;
+  final String? username;
   ButtonState buttonState;
   final LoginController controller;
 
@@ -39,6 +42,13 @@ class _FormLogin extends State<FormLogin> {
         setState(() {
           if (widget.controller.logged) {
             widget.buttonState = ButtonState.normal;
+            Navigator.of(context).pushNamed(
+              pageRoutes.profile,
+              arguments: Arguments(
+                widget.emailController.text,
+                widget.username,
+              ),
+            );
           } else {
             widget.buttonState = ButtonState.error;
           }
@@ -98,7 +108,7 @@ class _FormLogin extends State<FormLogin> {
                         "Sign up",
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed(RegisterView.routeName);
+                        Navigator.of(context).pushNamed(pageRoutes.register);
                       }),
                 ),
               ],

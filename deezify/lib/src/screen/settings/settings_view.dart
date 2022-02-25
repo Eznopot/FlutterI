@@ -5,8 +5,6 @@ import 'settings_controller.dart';
 class SettingsView extends StatelessWidget {
   const SettingsView({Key? key, required this.controller}) : super(key: key);
 
-  static const routeName = '/settings';
-
   final SettingsController controller;
 
   @override

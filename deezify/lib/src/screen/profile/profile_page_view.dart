@@ -1,14 +1,13 @@
+import 'package:deezify/src/config/images.dart';
+import 'package:deezify/src/route/page_routes.dart';
 import 'package:deezify/src/screen/settings/settings_view.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/profile_image_widget.dart';
+import '../../widget/profile_image_widget.dart';
 
 /// Displays 
 class ProfilePageView extends StatelessWidget {
   const ProfilePageView({Key? key}) : super(key: key);
-  
-
-  static const routeName = '/profile_page';
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +20,9 @@ class ProfilePageView extends StatelessWidget {
         actions:  <Widget>[
           IconButton(
             onPressed: () {
-              Navigator.restorablePushNamed(context, SettingsView.routeName);
+              Navigator.restorablePushNamed(context, pageRoutes.setting);
             },
-            icon: Image.asset('images/Profile.png'),
+            icon: Image.asset(DeezifyImages.unknownProfileIcon),
             iconSize: 50,
           )
         ],

@@ -1,5 +1,5 @@
-import 'dart:io';
-
+import 'package:deezify/src/config/colors.dart';
+import 'package:deezify/src/navigationDrawer/navigation_drawer.dart';
 import 'package:deezify/src/screen/login/login_service.dart';
 import 'package:flutter/material.dart';
 import '../../composant/form_login.dart';
@@ -7,10 +7,10 @@ import '../../widget/progress_button.dart';
 import 'login_controller.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({Key? key, this.email}) : super(key: key);
+  const LoginView({Key? key, this.email, this.username}) : super(key: key);
 
-  static const routeName = '/login';
   final String? email;
+  final String? username;
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -36,6 +36,12 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: DeezifyColors.appBarBackgound,
+        elevation: 0,
+        title: Text("Login".toUpperCase(), style: TextStyle(color: Colors.white),),
+      ),
+      drawer: navigationDrawer(),
       backgroundColor: const Color.fromRGBO(240, 240, 240, 1),
       resizeToAvoidBottomInset: false,
       body: Padding(
@@ -72,7 +78,7 @@ class _LoginViewState extends State<LoginView> {
                 ],
               )),
             ),
-            FormLogin(emailController: emailController, passwordController: passwordController, buttonState: buttonState, controller: controller),
+            FormLogin(emailController: emailController, passwordController: passwordController, username: widget.username, buttonState: buttonState, controller: controller,),
           ],
         ),
       ),

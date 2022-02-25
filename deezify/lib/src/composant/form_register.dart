@@ -1,8 +1,8 @@
 import 'package:deezify/src/composant/text_field_no_border.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:deezify/src/model/arguments.dart';
+import 'package:deezify/src/route/page_routes.dart';
 import 'package:flutter/material.dart';
 
-import '../screen/login/login_view.dart';
 import '../screen/register/register_controller.dart';
 import '../widget/custom_center.dart';
 import '../widget/progress_button.dart';
@@ -47,8 +47,12 @@ class _FormRegister extends State<FormRegister> {
             widget.buttonState = ButtonState.normal;
           });
           Navigator.of(context).pushNamed(
-              LoginView.routeName,
-              arguments: widget.emailController.text);
+            pageRoutes.login,
+            arguments: Arguments(
+              widget.emailController.text,
+              widget.usernameController.text,
+            ),
+          );
         });
       });
     } else {
@@ -120,7 +124,7 @@ class _FormRegister extends State<FormRegister> {
                     ),
                     onPressed: () {
                       Navigator.of(context)
-                          .pushNamed(LoginView.routeName);
+                          .pushNamed(pageRoutes.login);
                     }),
               ),
             ],
