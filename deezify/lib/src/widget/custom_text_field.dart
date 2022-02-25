@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
     this.outlineInputBorder,
     this.isPassword,
     this.color,
+    this.changed,
   }) : super(key: key);
 
   final String? labelText;
@@ -19,12 +20,14 @@ class CustomTextField extends StatelessWidget {
   final OutlineInputBorder? outlineInputBorder;
   final TextEditingController? controller;
   final Color? color;
+  final void Function(String string)? changed;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       obscureText: isPassword ?? false,
       controller: controller,
+      onChanged: changed,
       decoration: InputDecoration(
         border: outlineInputBorder ?? inputBorder ?? const OutlineInputBorder(),
         labelText: labelText,

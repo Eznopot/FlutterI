@@ -17,7 +17,7 @@ class Routes {
       //case pageRoutes.profilePage:
       //  return MaterialPageRoute(builder: (_) => const ProfilePageView());
       case pageRoutes.musicList:
-        return MaterialPageRoute(builder: (_) => const MusicListPage());
+        return MaterialPageRoute(builder: (_) => MusicListPage());
       case pageRoutes.login:
         if (settings.arguments != null) {
           final args = settings.arguments as Arguments;
