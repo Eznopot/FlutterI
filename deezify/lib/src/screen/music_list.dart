@@ -30,7 +30,6 @@ class _MusicListPage extends State<MusicListPage>{
           itemCount: Album.musicJson.length,
           itemBuilder: (BuildContext context, int index) {
             Map<String, String> music = Album.musicJson.elementAt(index);
-
             return ListTile(
               title: Text("${music["name"]}",),
               subtitle: Text("${music["artist"]}",),
