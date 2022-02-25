@@ -1,6 +1,6 @@
+import 'package:deezify/src/screen/settings/settings_view.dart';
 import 'package:flutter/material.dart';
 
-import '../settings/settings_view.dart';
 import '../widgets/profile_image_widget.dart';
 
 /// Displays 

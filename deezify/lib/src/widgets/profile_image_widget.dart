@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../settings/settings_view.dart';
+import '../screen/settings/settings_view.dart';
 
 
 /// Displays 
