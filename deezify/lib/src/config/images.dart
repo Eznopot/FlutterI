@@ -10,4 +10,5 @@ class DeezifyImages {
   static const designApp = 'assets/images/Design_App.png';
   static const listeningMusic = 'assets/images/Listening_to_Music.png';
   static const unknownProfileIcon = 'assets/images/Profile.png';
+  static const profileHeader = 'assets/images/profile_header.jpg';
 }

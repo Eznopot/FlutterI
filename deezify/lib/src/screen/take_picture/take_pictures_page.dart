@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:deezify/src/screen/profile/profile.dart';
 import 'package:deezify/src/widget/loading_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -75,7 +76,8 @@ class _TakePicturePage extends State<TakePicturePage> {
   void takePicture() async {
     await _initializeControllerFuture;
     final image = await _controller.takePicture();
-    Navigator.pop(context, image.path);
+    print(image.path);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Profile(imagePath: image.path,)));
   }
 
 }
