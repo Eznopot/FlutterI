@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:deezify/src/config/colors.dart';
+import 'package:deezify/src/config/images.dart';
 import 'package:deezify/src/navigationDrawer/navigation_drawer.dart';
 import 'package:deezify/src/screen/register/register_service.dart';
 import 'package:flutter/material.dart';
@@ -37,12 +38,12 @@ class _RegisterViewState extends State<RegisterView> {
         backgroundColor: DeezifyColors.appBarBackgound,
         elevation: 0,
         title: Text(
-          "Profile".toUpperCase(),
+          "Sign Up".toUpperCase(),
           style: TextStyle(color: Colors.white),
         ),
       ),
       drawer: navigationDrawer(),
-      backgroundColor: const Color.fromRGBO(240, 240, 240, 1),
+      backgroundColor: DeezifyColors.RegisterBackground,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -64,7 +65,7 @@ class _RegisterViewState extends State<RegisterView> {
                           decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image:
-                                    AssetImage("assets/icon/DeezifyLogo.png"),
+                                    AssetImage(DeezifyImages.logo),
                                 fit: BoxFit.contain),
                           ),
                         ),

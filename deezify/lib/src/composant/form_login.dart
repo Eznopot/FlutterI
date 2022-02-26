@@ -13,14 +13,12 @@ class FormLogin extends StatefulWidget {
       {Key? key,
       required this.emailController,
       required this.passwordController,
-      required this.username,
       required this.buttonState,
       required this.controller})
       : super(key: key);
 
   final TextEditingController emailController;
   final TextEditingController passwordController;
-  final String? username;
   ButtonState buttonState;
   final LoginController controller;
 
@@ -46,7 +44,6 @@ class _FormLogin extends State<FormLogin> {
               pageRoutes.profile,
               arguments: Arguments(
                 widget.emailController.text,
-                widget.username,
               ),
             );
           } else {

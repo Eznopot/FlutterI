@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:deezify/src/screen/profile/profile.dart';
+import 'package:deezify/src/utils/secure_storage.dart';
 import 'package:deezify/src/widget/loading_dialog.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class _TakePicturePage extends State<TakePicturePage> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
   late CameraDescription camera;
+  final SecureStorage secureStorage = SecureStorage();
 
   Future<CameraDescription> getCameraDescription() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -76,8 +78,7 @@ class _TakePicturePage extends State<TakePicturePage> {
   void takePicture() async {
     await _initializeControllerFuture;
     final image = await _controller.takePicture();
-    print(image.path);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Profile(imagePath: image.path,)));
+    secureStorage.writeSecureData("profileImage", image.path);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
   }
-
 }

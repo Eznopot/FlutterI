@@ -1,6 +1,7 @@
 import 'package:deezify/src/composant/text_field_no_border.dart';
 import 'package:deezify/src/model/arguments.dart';
 import 'package:deezify/src/route/page_routes.dart';
+import 'package:deezify/src/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
 
 import '../screen/register/register_controller.dart';
@@ -28,6 +29,8 @@ class FormRegister extends StatefulWidget {
 }
 
 class _FormRegister extends State<FormRegister> {
+  final SecureStorage secureStorage = SecureStorage();
+
   void registerProcess() {
     setState(() {
       widget.buttonState = ButtonState.inProgress;
@@ -41,6 +44,7 @@ class _FormRegister extends State<FormRegister> {
           widget.passwordController.text,
           widget.usernameController.text)
           .then((value) {
+        secureStorage.writeSecureData('username', widget.usernameController.text);
         Future.delayed(const Duration(seconds: 1))
             .then((value) {
           setState(() {
@@ -50,7 +54,6 @@ class _FormRegister extends State<FormRegister> {
             pageRoutes.login,
             arguments: Arguments(
               widget.emailController.text,
-              widget.usernameController.text,
             ),
           );
         });

@@ -1,4 +1,5 @@
 import 'package:deezify/src/config/colors.dart';
+import 'package:deezify/src/config/images.dart';
 import 'package:deezify/src/navigationDrawer/navigation_drawer.dart';
 import 'package:deezify/src/screen/login/login_service.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
       drawer: const navigationDrawer(),
-      backgroundColor: const Color.fromRGBO(240, 240, 240, 1),
+      backgroundColor: DeezifyColors.loginBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -67,7 +68,7 @@ class _LoginViewState extends State<LoginView> {
                           decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image:
-                                    AssetImage("assets/icon/DeezifyLogo.png"),
+                                    AssetImage(DeezifyImages.logo),
                                 fit: BoxFit.contain),
                           ),
                         ),
@@ -88,7 +89,6 @@ class _LoginViewState extends State<LoginView> {
                 FormLogin(
                   emailController: emailController,
                   passwordController: passwordController,
-                  username: widget.username,
                   buttonState: buttonState,
                   controller: controller,
                 ),
