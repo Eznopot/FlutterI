@@ -1,19 +1,37 @@
+import 'dart:io';
+
 import 'package:deezify/src/config/colors.dart';
 import 'package:deezify/src/config/images.dart';
 import 'package:deezify/src/navigationDrawer/navigation_drawer.dart';
 import 'package:deezify/src/route/page_routes.dart';
+import 'package:deezify/src/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
 
 import '../../widget/home_page_card.dart';
 import '../../widget/home_page_logo.dart';
 
-/// Displays 
-class HomePageView extends StatelessWidget {
-  const HomePageView({Key? key}) : super(key: key);
+class HomePageView extends StatefulWidget {
+  const HomePageView({ Key? key }) : super(key: key);
 
   @override
+  _HomePageViewState createState() => _HomePageViewState();
+}
+
+class _HomePageViewState extends State<HomePageView> {
+  final SecureStorage secureStorage = SecureStorage();
+  String? imagePath;
+
+  @override
+  void initState() {
+    super.initState();
+    secureStorage.readSecureData("profileImage").then((value) {
+      setState(() {
+        imagePath = value;
+      });
+    });
+  }
+  @override
   Widget build(BuildContext context) {
-    
     bool isScreenWide = MediaQuery.of(context).size.width >= 765;
 
     return Scaffold(
@@ -21,13 +39,20 @@ class HomePageView extends StatelessWidget {
         title: const Text('Home Page'),
         backgroundColor: DeezifyColors.appBarBackgound,
         actions:  <Widget>[
-          IconButton(
-            onPressed: () {
+          GestureDetector(
+            onTap: () {
               Navigator.restorablePushNamed(context, pageRoutes.profile);
             },
-            icon: Image.asset(DeezifyImages.unknownProfileIcon),
-            iconSize: 50,
-          )
+            child: Padding(
+              padding: EdgeInsets.all(10.0),
+              child: CircleAvatar(
+                backgroundColor: Colors.grey.shade800,
+                backgroundImage: imagePath != null
+                  ? FileImage(File(imagePath!))
+                  : AssetImage(DeezifyImages.unknownProfileIcon) as ImageProvider,
+              ),
+            ),
+          ),
         ],
       ),
       drawer: navigationDrawer(),
