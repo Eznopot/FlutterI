@@ -39,6 +39,7 @@ class HomePageCardView extends StatelessWidget {
             ),
             Text(
               message,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 15,
                 color: Color.fromARGB(255, 255, 255, 255)
