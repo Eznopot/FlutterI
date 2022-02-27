@@ -12,7 +12,7 @@ class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
 
     final SecureStorage secureStorage = SecureStorage();
-    String? username;
+    String? email;
     
     switch (settings.name) {
       case pageRoutes.home:
@@ -30,10 +30,10 @@ class Routes {
       case pageRoutes.profile:
         return MaterialPageRoute(builder: (_) => Container(
           child: FutureBuilder(
-            future: secureStorage.readSecureData("username"),
+            future: secureStorage.readSecureData("email"),
             builder:  (context, snapshot) {
-              username = snapshot.data.toString();
-              if (username == "null") {
+              email = snapshot.data.toString();
+              if (email == null) {
                 return LoginView();
               } else {
                 return Profile();

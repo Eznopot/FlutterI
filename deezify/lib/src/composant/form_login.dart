@@ -1,4 +1,5 @@
 import 'package:deezify/src/composant/text_field_no_border.dart';
+import 'package:deezify/src/config/colors.dart';
 import 'package:deezify/src/model/arguments.dart';
 import 'package:deezify/src/route/page_routes.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,11 @@ class _FormLogin extends State<FormLogin> {
               ),
             );
           } else {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content:Text("Incorrect email or password.", style: TextStyle(color: Colors.red.shade800),),
+              backgroundColor: DeezifyColors.snackBarBackground,
+
+            ));
             widget.buttonState = ButtonState.error;
           }
         });

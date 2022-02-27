@@ -184,10 +184,30 @@ class _ProfileState extends State<Profile> {
             SizedBox(height: size.height*0.10,),
             Center(
               child: Text(
-                username ?? "empty",
+                username ?? "Unknown user",
                 style: TextStyle(
                   fontSize: usernameFontSize,
                 ),
+              ),
+            ),
+            SizedBox(height: size.height*0.10,),
+            Center(
+              child: ElevatedButton(
+                child: Text(
+                  "Log out",
+                  style: TextStyle(fontSize: 18),
+                ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.indigoAccent),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    )
+                  )
+                ),
+                onPressed: () {
+                  Navigator.of(context).popAndPushNamed(pageRoutes.login);
+                },
               ),
             ),
           ],
