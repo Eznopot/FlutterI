@@ -7,8 +7,8 @@ class DeezifyImages {
   static const album_4 = 'assets/images/album_4.png';
   static const album_5 = 'assets/images/album_5.png';
   static const logo = 'assets/images/Deezify_Logo.png';
-  static const designApp = 'assets/images/Design_App.png';
-  static const listeningMusic = 'assets/images/Listening_to_Music.png';
+  static const designApp = 'assets/images/Design_App.jpg';
+  static const listeningMusic = 'assets/images/Listening_to_Music.jpg';
   static const unknownProfileIcon = 'assets/images/Profile.png';
   static const profileHeader = 'assets/images/profile_header.jpg';
 }

@@ -50,13 +50,13 @@ class _MusicListPage extends State<MusicListPage> {
       ),
       drawer: const navigationDrawer(),
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: size.height * 0.1, horizontal: size.width * 0.1
-          ),
-          child: Column(
-            children: <Widget>[
-              CustomTextField(
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: size.height * 0.1, horizontal: size.width * 0.1
+              ),
+              child: CustomTextField(
                 labelText: "Search",
                 hintText: "search music title",
                 controller: widget.searchController,
@@ -66,7 +66,10 @@ class _MusicListPage extends State<MusicListPage> {
                   });
                 }
               ),
-              ListView.builder(
+            ),
+            Expanded(
+              child: ListView.builder(
+                padding: EdgeInsets.all(10.0),
                 itemCount: musicList.length,
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, int index) {
@@ -98,8 +101,8 @@ class _MusicListPage extends State<MusicListPage> {
                   );
                 },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

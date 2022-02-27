@@ -31,14 +31,15 @@ class HomePageView extends StatelessWidget {
         ],
       ),
       drawer: navigationDrawer(),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            const HomePageLogo(),
-            Center(
-              child: Flex(
-              direction: isScreenWide ? Axis.horizontal : Axis.vertical,
-                mainAxisAlignment: MainAxisAlignment.center,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              const HomePageLogo(),
+              Center(
+                child: Flex(
+                  direction: isScreenWide ? Axis.horizontal : Axis.vertical,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     HomePageCardView(
                       "Une qualité de son garantie\n",
@@ -56,6 +57,7 @@ class HomePageView extends StatelessWidget {
             ],
           )
         ),
+      ),
     );
   }
 }
