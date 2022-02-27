@@ -29,6 +29,7 @@ class HomePageCardView extends StatelessWidget {
           children: <Widget>[
             Text(
               title,
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
