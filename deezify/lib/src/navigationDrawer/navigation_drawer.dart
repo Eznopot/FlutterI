@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:deezify/src/route/page_routes.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../screen/settings/settings_controller.dart';
+import '../screen/settings/settings_service.dart';
+
 
 class navigationDrawer extends StatelessWidget {
   const navigationDrawer({Key? key}) : super(key: key);
@@ -79,8 +82,10 @@ class navigationDrawer extends StatelessWidget {
           drawerBodyItem(
             icon: FontAwesomeIcons.music,
             text: 'Option',
-            onTap: () =>
-                Navigator.popAndPushNamed(context, pageRoutes.setting),
+            onTap: () {
+              SettingsController settingsController = SettingsController(SettingsService());
+              settingsController.loadSettings().then((_) => Navigator.popAndPushNamed(context, pageRoutes.setting, arguments : settingsController));
+            }
           ),
           Divider(),
         ],

@@ -6,15 +6,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({
+  MyApp({
     Key? key,
     required this.settingsController,
   }) : super(key: key);
 
   final SettingsController settingsController;
-
   @override
   Widget build(BuildContext context) {
+    Routes.settingsController = settingsController;
     return AnimatedBuilder(
       animation: settingsController,
       builder: (BuildContext context, Widget? child) {

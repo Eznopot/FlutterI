@@ -12,6 +12,7 @@ class SettingsController with ChangeNotifier {
   ThemeMode get themeMode => _themeMode;
 
   Future<void> loadSettings() async {
+    WidgetsFlutterBinding.ensureInitialized();
     _themeMode = await _settingsService.themeMode();
     notifyListeners();
   }
