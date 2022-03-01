@@ -219,6 +219,7 @@ class _ProfileState extends State<Profile> {
                 ),
                 onPressed: () {
                   MyCacheManager.writeBool("logged", false);
+                  secureStorage.writeSecureData("logged", "false");
                   MyCacheManager.writeString("loggedInfo", "");
                   Navigator.of(context).popAndPushNamed(pageRoutes.login);
                 },

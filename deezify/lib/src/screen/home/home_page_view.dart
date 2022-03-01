@@ -20,6 +20,7 @@ class HomePageView extends StatefulWidget {
 class _HomePageViewState extends State<HomePageView> {
   final SecureStorage secureStorage = SecureStorage();
   String? imagePath;
+  String? isLogged;
 
   @override
   void initState() {
@@ -27,6 +28,11 @@ class _HomePageViewState extends State<HomePageView> {
     secureStorage.readSecureData("profileImage").then((value) {
       setState(() {
         imagePath = value;
+      });
+    });
+    secureStorage.readSecureData("logged").then((value) {
+      setState(() {
+        isLogged = value;
       });
     });
   }
@@ -41,13 +47,15 @@ class _HomePageViewState extends State<HomePageView> {
         actions:  <Widget>[
           GestureDetector(
             onTap: () {
-              Navigator.restorablePushNamed(context, pageRoutes.profile);
+              isLogged == "true"
+              ? Navigator.popAndPushNamed(context, pageRoutes.profile)
+              : Navigator.popAndPushNamed(context, pageRoutes.login);
             },
             child: Padding(
               padding: EdgeInsets.all(10.0),
               child: CircleAvatar(
                 backgroundColor: Colors.grey.shade800,
-                backgroundImage: imagePath != null
+                backgroundImage: imagePath != null && isLogged == "true"
                   ? FileImage(File(imagePath!))
                   : AssetImage(DeezifyImages.unknownProfileIcon) as ImageProvider,
               ),

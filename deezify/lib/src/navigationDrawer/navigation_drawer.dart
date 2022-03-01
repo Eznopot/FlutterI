@@ -80,7 +80,7 @@ class navigationDrawer extends StatelessWidget {
                 Navigator.popAndPushNamed(context, pageRoutes.musicList),
           ),
           drawerBodyItem(
-            icon: FontAwesomeIcons.music,
+            icon: FontAwesomeIcons.slidersH,
             text: 'Option',
             onTap: () {
               SettingsController settingsController = SettingsController(SettingsService());
