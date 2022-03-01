@@ -29,8 +29,8 @@ class ProfilePageView extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          children: <Widget>[
-            const ProfileImageWidget(),
+          children: const <Widget>[
+            ProfileImageWidget(),
             ],
           )
         ),

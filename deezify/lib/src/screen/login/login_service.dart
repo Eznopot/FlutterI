@@ -10,7 +10,11 @@ class LoginService {
       for (String elem in list) {
         UserModel tmp = UserModel.fromJson(jsonDecode(elem));
         if (tmp.getEmail() == email && tmp.getPassword() == password) {
+          await MyCacheManager.writeString("loggedInfo", jsonEncode(tmp));
+          await MyCacheManager.writeBool("logged", true);
           return true;
+        } else {
+          await MyCacheManager.writeBool("logged", false);
         }
       }
     }

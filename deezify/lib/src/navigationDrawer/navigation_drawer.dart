@@ -76,6 +76,12 @@ class navigationDrawer extends StatelessWidget {
             onTap: () =>
                 Navigator.popAndPushNamed(context, pageRoutes.musicList),
           ),
+          drawerBodyItem(
+            icon: FontAwesomeIcons.music,
+            text: 'Option',
+            onTap: () =>
+                Navigator.popAndPushNamed(context, pageRoutes.setting),
+          ),
           Divider(),
         ],
       ),

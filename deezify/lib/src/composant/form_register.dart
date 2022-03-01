@@ -44,8 +44,6 @@ class _FormRegister extends State<FormRegister> {
           widget.passwordController.text,
           widget.usernameController.text)
           .then((value) {
-        secureStorage.writeSecureData('email', widget.usernameController.text);
-        secureStorage.writeSecureData('username', widget.usernameController.text);
         Future.delayed(const Duration(seconds: 1))
             .then((value) {
           setState(() {

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:deezify/src/config/colors.dart';
@@ -9,6 +10,9 @@ import 'package:deezify/src/utils/detect_device.dart';
 import 'package:deezify/src/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_cache_manager/my_cache_manager.dart';
+
+import '../../model/user_model.dart';
 
 class Profile extends StatefulWidget {
   const Profile({ Key? key }) : super(key: key);
@@ -19,22 +23,30 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
 
-  final SecureStorage secureStorage = SecureStorage();
   String? imagePath;
   String? username;
+  bool? isLogged;
+  final SecureStorage secureStorage = SecureStorage();
 
   @override
   void initState() {
     super.initState();
-    secureStorage.readSecureData("profileImage").then((value) {
-      setState(() {
-        imagePath = value;
-      });
-    });
-    secureStorage.readSecureData("username").then((value) {
-      setState(() {
-        username = value;
-      });
+    MyCacheManager.readBool("logged").then((logged) {
+      isLogged = logged;
+      if (logged == true) {
+        MyCacheManager.readString("loggedInfo").then((info) {
+          if (info != null) {
+            setState(() {
+              username = UserModel.fromJson(jsonDecode(info)).getEmail();
+            });
+          }
+        });
+        secureStorage.readSecureData("profileImage").then((value) {
+          setState(() {
+            imagePath = value;
+          });
+        });
+      }
     });
   }
 
@@ -165,7 +177,7 @@ class _ProfileState extends State<Profile> {
                     ),
                     child: IconButton(
                       padding: EdgeInsets.zero,
-                      icon: Icon(
+                      icon: const Icon(
                         FontAwesomeIcons.camera,
                         color: Colors.white,
                         size: 20.0,
@@ -184,7 +196,7 @@ class _ProfileState extends State<Profile> {
             SizedBox(height: size.height*0.10,),
             Center(
               child: Text(
-                username ?? "Unknown user",
+                isLogged == true && username != null ? username! : "Guest",
                 style: TextStyle(
                   fontSize: usernameFontSize,
                 ),
@@ -194,8 +206,8 @@ class _ProfileState extends State<Profile> {
             Center(
               child: ElevatedButton(
                 child: Text(
-                  "Log out",
-                  style: TextStyle(fontSize: 18),
+                  isLogged == true ? "Log out" : "Login",
+                  style: const TextStyle(fontSize: 18),
                 ),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.indigoAccent),
@@ -206,6 +218,8 @@ class _ProfileState extends State<Profile> {
                   )
                 ),
                 onPressed: () {
+                  MyCacheManager.writeBool("logged", false);
+                  MyCacheManager.writeString("loggedInfo", "");
                   Navigator.of(context).popAndPushNamed(pageRoutes.login);
                 },
               ),
