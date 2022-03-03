@@ -15,7 +15,6 @@ class LoginService {
         if (tmp.getEmail() == email && tmp.getPassword() == password) {
           await MyCacheManager.writeString("loggedInfo", jsonEncode(tmp));
           await MyCacheManager.writeBool("logged", true);
-          secureStorage.writeSecureData("logged", "true");
           return true;
         } else {
           await MyCacheManager.writeBool("logged", false);

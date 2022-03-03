@@ -13,8 +13,8 @@ class MusicPlayer extends StatefulWidget {
 }
 
 class _MusicPlayerState extends State<MusicPlayer> {
-  Duration _duration = Duration();
-  Duration _position = Duration();
+  Duration _duration = const Duration();
+  Duration _position = const Duration();
   bool isPlaying = false;
   bool isPaused = false;
   bool isLoop = false;
@@ -51,13 +51,11 @@ class _MusicPlayerState extends State<MusicPlayer> {
       icon: isPlaying == false ? Icon(_icons.first, size: 50.0,) : Icon(_icons.last, size: 50.0),
       onPressed: (){
         if (!isPlaying) {
-          print('is playing music');
           widget.musicPlayer!.play(widget.url);
           setState(() {
             isPlaying = true;
           });
         } else {
-          print('music is paused');
           widget.musicPlayer!.pause();
           setState(() {
             isPlaying = false;
@@ -69,7 +67,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
 
   Widget btnBackwardSlow() {
     return IconButton(
-      icon: Icon(FontAwesomeIcons.stepBackward, size: 20.0,),
+      icon: const Icon(FontAwesomeIcons.stepBackward, size: 20.0,),
       onPressed: (){
         widget.musicPlayer!.setPlaybackRate(0.5);
       },
@@ -78,7 +76,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
 
   Widget btnForwardFast() {
     return IconButton(
-      icon: Icon(FontAwesomeIcons.stepForward, size: 20.0,),
+      icon: const Icon(FontAwesomeIcons.stepForward, size: 20.0,),
       onPressed: (){
         widget.musicPlayer!.setPlaybackRate(1.5);
       },

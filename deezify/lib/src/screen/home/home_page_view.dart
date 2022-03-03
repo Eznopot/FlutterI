@@ -6,6 +6,7 @@ import 'package:deezify/src/navigationDrawer/navigation_drawer.dart';
 import 'package:deezify/src/route/page_routes.dart';
 import 'package:deezify/src/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:my_cache_manager/my_cache_manager.dart';
 
 import '../../widget/home_page_card.dart';
 import '../../widget/home_page_logo.dart';
@@ -20,7 +21,7 @@ class HomePageView extends StatefulWidget {
 class _HomePageViewState extends State<HomePageView> {
   final SecureStorage secureStorage = SecureStorage();
   String? imagePath;
-  String? isLogged;
+  bool? isLogged;
 
   @override
   void initState() {
@@ -30,7 +31,7 @@ class _HomePageViewState extends State<HomePageView> {
         imagePath = value;
       });
     });
-    secureStorage.readSecureData("logged").then((value) {
+    MyCacheManager.readBool("logged").then((value) {
       setState(() {
         isLogged = value;
       });
@@ -47,23 +48,23 @@ class _HomePageViewState extends State<HomePageView> {
         actions:  <Widget>[
           GestureDetector(
             onTap: () {
-              isLogged == "true"
+              isLogged == true
               ? Navigator.popAndPushNamed(context, pageRoutes.profile)
               : Navigator.popAndPushNamed(context, pageRoutes.login);
             },
             child: Padding(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               child: CircleAvatar(
                 backgroundColor: Colors.grey.shade800,
-                backgroundImage: imagePath != null && isLogged == "true"
+                backgroundImage: imagePath != null && isLogged == true
                   ? FileImage(File(imagePath!))
-                  : AssetImage(DeezifyImages.unknownProfileIcon) as ImageProvider,
+                  : const AssetImage(DeezifyImages.unknownProfileIcon) as ImageProvider,
               ),
             ),
           ),
         ],
       ),
-      drawer: navigationDrawer(),
+      drawer: const navigationDrawer(),
       body: SingleChildScrollView(
         child: Center(
           child: Column(

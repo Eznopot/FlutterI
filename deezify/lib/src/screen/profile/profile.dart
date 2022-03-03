@@ -25,6 +25,7 @@ class _ProfileState extends State<Profile> {
 
   String? imagePath;
   String? username;
+  String? email;
   bool? isLogged;
   final SecureStorage secureStorage = SecureStorage();
 
@@ -37,7 +38,8 @@ class _ProfileState extends State<Profile> {
         MyCacheManager.readString("loggedInfo").then((info) {
           if (info != null) {
             setState(() {
-              username = UserModel.fromJson(jsonDecode(info)).getEmail();
+              username = UserModel.fromJson(jsonDecode(info)).getUsername();
+              email = UserModel.fromJson(jsonDecode(info)).getEmail();
             });
           }
         });
@@ -68,7 +70,7 @@ class _ProfileState extends State<Profile> {
       backgroundColor: Colors.grey.shade800,
       backgroundImage: imagePath != null
         ? FileImage(File(imagePath!))
-        : AssetImage(DeezifyImages.unknownProfileIcon) as ImageProvider,
+        : const AssetImage(DeezifyImages.unknownProfileIcon) as ImageProvider,
     );
   }
 
@@ -144,9 +146,9 @@ class _ProfileState extends State<Profile> {
         appBar: AppBar(
           backgroundColor: DeezifyColors.appBarBackgound,
           elevation: 0,
-          title: Text("Profile".toUpperCase(), style: TextStyle(color: Colors.white),),
+          title: Text("Profile".toUpperCase(), style: const TextStyle(color: Colors.white),),
         ),
-        drawer: navigationDrawer(),
+        drawer: const navigationDrawer(),
         body: ListView(
           children: [
             Stack(
@@ -185,7 +187,7 @@ class _ProfileState extends State<Profile> {
                       onPressed: (){
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => TakePicturePage(),),
+                          MaterialPageRoute(builder: (_) => const TakePicturePage(),),
                         );
                       },
                     ),
@@ -196,7 +198,15 @@ class _ProfileState extends State<Profile> {
             SizedBox(height: size.height*0.10,),
             Center(
               child: Text(
-                isLogged == true && username != null ? username! : "Guest",
+                "Username :" + (isLogged == true && username != null ? username! : "Guest"),
+                style: TextStyle(
+                  fontSize: usernameFontSize,
+                ),
+              ),
+            ),
+            Center(
+              child: Text(
+                "Email :" + (isLogged == true && email != null ? email! : ""),
                 style: TextStyle(
                   fontSize: usernameFontSize,
                 ),
@@ -219,7 +229,6 @@ class _ProfileState extends State<Profile> {
                 ),
                 onPressed: () {
                   MyCacheManager.writeBool("logged", false);
-                  secureStorage.writeSecureData("logged", "false");
                   MyCacheManager.writeString("loggedInfo", "");
                   Navigator.of(context).popAndPushNamed(pageRoutes.login);
                 },
