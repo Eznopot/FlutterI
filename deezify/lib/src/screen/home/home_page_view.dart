@@ -22,6 +22,10 @@ class _HomePageViewState extends State<HomePageView> {
   final SecureStorage secureStorage = SecureStorage();
   String? imagePath;
   bool? isLogged;
+  String titleCard1 = "Une qualité de son garantie\n";
+  String titleCard2 = "Une utilisation facile à prendre en main\n";
+  String textCard1 = "Deezify, avec sa technologie avancée de traitement de son, trie dans sa base de donnée les musiques qui répondent au demande exigente de qualité sonnore que Deezify à défini.";
+  String textCard2 = "Deezify s'est concentré à avoir un site simple, intuitifs et agréable visuellement afin de facilité son utilisation.";
 
   @override
   void initState() {
@@ -76,13 +80,13 @@ class _HomePageViewState extends State<HomePageView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     HomePageCardView(
-                      "Une qualité de son garantie\n",
-                      "Deezify, avec sa technologie avancée de traitement de son, trie dans sa base de donnée les musiques qui répondent au demande exigente de qualité sonnore que Deezify à défini.", 
+                      titleCard1,
+                      textCard1, 
                       DeezifyImages.listeningMusic,
                     ),
                     HomePageCardView(
-                      "Une utilisation facile à prendre en main\n",
-                      "Deezify s'est concentré à avoir un site simple, intuitifs et agréable visuellement afin de facilité son utilisation.", 
+                      titleCard2,
+                      textCard2, 
                       DeezifyImages.designApp,
                     ),
                   ],
