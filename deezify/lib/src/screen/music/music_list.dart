@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class MusicListPage extends StatefulWidget {
   MusicListPage({Key? key}) : super(key: key);
-  TextEditingController searchController = TextEditingController();
+  final TextEditingController searchController = TextEditingController();
 
   @override
   State<StatefulWidget> createState() {
@@ -22,15 +22,10 @@ class _MusicListPage extends State<MusicListPage> {
   void changedList(String text) {
     List<Map<String, String>> tmp = [];
     musicList = Album.musicJson;
-    if (text.length < 3) {
-      return;
-    }
+    if (text.length < 3) {return;}
     for (Map<String, String> elem in musicList) {
-      if (elem["name"] != null && elem["name"]!.compareTo(text) == 0) {
-        tmp.insert(0, elem);
-      } else if (elem["name"] != null && elem["name"]!.compareTo(text) == 1) {
-        tmp.add(elem);
-      }
+      if (elem["name"] != null && elem["name"]!.compareTo(text) == 0) {tmp.insert(0, elem);}
+      else if (elem["name"] != null && elem["name"]!.compareTo(text) == 1) {tmp.add(elem);}
     }
     musicList = tmp;
   }
@@ -53,17 +48,13 @@ class _MusicListPage extends State<MusicListPage> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: size.height * 0.1, horizontal: size.width * 0.1
-              ),
+              padding: EdgeInsets.symmetric(vertical: size.height * 0.1, horizontal: size.width * 0.1),
               child: CustomTextField(
                 labelText: "Search",
                 hintText: "search music title",
                 controller: widget.searchController,
                 changed: (text) {
-                  setState(() {
-                    changedList(text);
-                  });
+                  setState(() => changedList(text));
                 }
               ),
             ),
@@ -75,15 +66,9 @@ class _MusicListPage extends State<MusicListPage> {
                 itemBuilder: (BuildContext context, int index) {
                   Map<String, String> music = musicList.elementAt(index);
                   return ListTile(
-                    title: Text(
-                      "${music["name"]}",
-                    ),
-                    subtitle: Text(
-                      "${music["artist"]}",
-                    ),
-                    trailing: Text(
-                      "${music["duration"]}",
-                    ),
+                    title: Text("${music["name"]}",),
+                    subtitle: Text("${music["artist"]}",),
+                    trailing: Text("${music["duration"]}",),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -91,8 +76,7 @@ class _MusicListPage extends State<MusicListPage> {
                           builder: (context) => MusicDetailPage(
                             artistName: music["artist"],
                             musicName: music["name"],
-                            albumImage: music["albumImage"] ??
-                                DeezifyImages.origin,
+                            albumImage: music["albumImage"] ?? DeezifyImages.origin,
                             url: music["url"] ?? "",
                           )
                         ),

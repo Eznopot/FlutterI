@@ -24,18 +24,12 @@ class _MusicPlayerState extends State<MusicPlayer> {
     Icons.pause_circle_filled,
   ];
 
-
   @override
   void initState() {
     super.initState();
     widget.musicPlayer!.setUrl(widget.url);
-    widget.musicPlayer?.onDurationChanged.listen((d) {setState(() {
-      _duration = d;
-    });});
-    widget.musicPlayer?.onAudioPositionChanged.listen((p) {setState(() {
-      _position = p;
-    });});
-
+    widget.musicPlayer?.onDurationChanged.listen((d) => setState(() => _duration = d));
+    widget.musicPlayer?.onAudioPositionChanged.listen((p) => setState(() => _position = p));
   }
 
   @override
@@ -52,14 +46,10 @@ class _MusicPlayerState extends State<MusicPlayer> {
       onPressed: (){
         if (!isPlaying) {
           widget.musicPlayer!.play(widget.url);
-          setState(() {
-            isPlaying = true;
-          });
+          setState(() => isPlaying = true);
         } else {
           widget.musicPlayer!.pause();
-          setState(() {
-            isPlaying = false;
-          });
+          setState(() => isPlaying = false);
         }
       },
     );
@@ -129,14 +119,10 @@ class _MusicPlayerState extends State<MusicPlayer> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(_position.toString().split(".").first,
-                    style: GoogleFonts.nunito(
-                      fontSize: 16.0,
-                    ),
+                    style: GoogleFonts.nunito(fontSize: 16.0,),
                   ),
                   Text(_duration.toString().split(".").first,
-                    style: GoogleFonts.nunito(
-                      fontSize: 16.0,
-                    ),
+                    style: GoogleFonts.nunito(fontSize: 16.0,),
                   ),
                 ],
               ),

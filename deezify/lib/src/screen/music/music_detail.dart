@@ -6,7 +6,6 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:deezify/src/config/colors.dart';
 
-
 class MusicDetailPage extends StatefulWidget {
   final String? musicName;
   final String? artistName;
@@ -71,9 +70,7 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: DeezifyColors.appBarBackgound,
-      ),
+      appBar: AppBar(backgroundColor: DeezifyColors.appBarBackgound,),
       drawer: navigationDrawer(),
       body: OrientationBuilder(
         builder: (context, orientation) {
@@ -102,9 +99,7 @@ class _MusicDetailPageState extends State<MusicDetailPage> {
                             ),
                             subtitle: Center(
                               child: Text(widget.artistName!.toUpperCase(),
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
+                                style: TextStyle(fontSize: 20,),
                               ),
                             ),
                           ),

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:deezify/src/config/colors.dart';
 import 'package:deezify/src/config/images.dart';
 import 'package:deezify/src/navigationDrawer/navigation_drawer.dart';
@@ -43,7 +41,7 @@ class _RegisterViewState extends State<RegisterView> {
         ),
       ),
       drawer: navigationDrawer(),
-      backgroundColor: DeezifyColors.RegisterBackground,
+      backgroundColor: DeezifyColors.registerBackground,
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: SingleChildScrollView(
